@@ -4,10 +4,10 @@ import Footer from '../components/layout/Footer';
 import AdsterraLayoutWrapper from '../components/AdsterraLayoutWrapper';
 
 export const metadata = {
-  title: 'LK21 Stream | Watxh Movies and TV Series Free HD ',
+  title: 'LK21 Stream | Watch Movies and TV Series Free HD ',
   description: 'LK21 Stream is your one-stop destination for free movies, TV shows, and web series. Download thousands of titles in HD quality, with unlimited access to the latest blockbusters and trending series. Start your free entertainment journey today! ',
   openGraph: {
-    title: 'LK21 Stream | Watxh Movies and TV Series Free HD',
+    title: 'LK21 Stream | Watch Movies and TV Series Free HD',
     description: 'LK21 Stream is your one-stop destination for free movies, TV shows, and web series. Download thousands of titles in HD quality, with unlimited access to the latest blockbusters and trending series. Start your free entertainment journey today! ',
     url: 'https://LK21 Stream123.vercel.app',
     siteName: 'LK21 Stream',
@@ -26,7 +26,7 @@ export const metadata = {
     card: 'summary_large_image',
     site: '@WatchStream123',
     creator: '@WatchStream123',
-    title: 'LK21 Stream | Watxh Movies and TV Series Free HD',
+    title: 'LK21 Stream | Watch Movies and TV Series Free HD',
     description: 'LK21 Stream is your one-stop destination for free movies, TV shows, and web series. Download thousands of titles in HD quality, with unlimited access to the latest blockbusters and trending series. Start your free entertainment journey today!',
     images: ['https://live.staticflickr.com/65535/54783431146_cea3af132d_b.jpg'],
   },
@@ -39,6 +39,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+	  <head>
+        {/* Tag verifikasi Google Search Console */}
+        <meta name="google-site-verification" content="43U0FE_9YdrByOFa7zNlMk0hxaMxt1P1zitJs_LBJFU" />
+      </head>
       <body>
         <AdsterraLayoutWrapper>
           <div className="flex flex-col min-h-screen bg-slate-900">
