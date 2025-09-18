@@ -12,7 +12,7 @@ export default async function TrendingPage() {
   return (
     <>
       <Head>
-        <title>Daily Trending - LK21 Stream</title>
+        <title>Daily Trending - Layar Kaca</title>
       </Head>
       <TrendingClient 
         initialMovies={trendingMovies} 

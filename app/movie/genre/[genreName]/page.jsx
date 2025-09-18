@@ -14,17 +14,17 @@ export async function generateMetadata({ params }) {
   const genre = genres.find(g => g.name.toLowerCase().replace(/\s/g, '-') === genreName);
   const title = genre?.name || 'Unknown';
 
-  const pageUrl = `https://LK21-Stream.vercel.app/movie/genre/${genreName}`;
-  const imageUrl = 'https://live.staticflickr.com/65535/54783431146_cea3af132d_b.jpg';
+  const pageUrl = `https://layarkaca.vercel.app/movie/genre/${genreName}`;
+  const imageUrl = 'https://live.staticflickr.com/65535/54794306467_b29aef23de_b.jpg';
 
   return {
-    title: `LK21  Stream - ${title} Movies`,
-    description: `Find and watch the best ${title} movies for free on LK21  Stream.`,
+    title: `Layar Kaca - ${title} Movies`,
+    description: `Find and watch the best ${title} movies for free on Layar Kaca.`,
     openGraph: {
-      title: `LK21  Stream - ${title} Movies`,
-      description: `Find and watch the best ${title} movies for free on LK21  Stream.`,
+      title: `Layar Kaca - ${title} Movies`,
+      description: `Find and watch the best ${title} movies for free on Layar Kaca.`,
       url: pageUrl,
-      siteName: 'LK21  Stream',
+      siteName: 'Layar Kaca',
       images: [
         {
           url: imageUrl,
@@ -40,8 +40,8 @@ export async function generateMetadata({ params }) {
       card: 'summary_large_image',
       site: '@WatchStream123',
       creator: '@WatchStream123',
-      title: `LK21  Stream - ${title} Movies`,
-      description: `Find and watch the best ${title} movies for free on LK21  Stream.`,
+      title: `Layar Kaca - ${title} Movies`,
+      description: `Find and watch the best ${title} movies for free on Layar Kaca.`,
       images: [imageUrl],
     },
     other: {

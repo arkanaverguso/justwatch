@@ -3,7 +3,7 @@
 "use client";
 
 import Link from 'next/link';
-import { FaVideo, FaChevronDown, FaBars, FaTimes } from 'react-icons/fa';
+import { FaVideo, FaChevronDown, FaBars, FaTimes, FaExclamationTriangle } from 'react-icons/fa';
 import { getMovieGenres, getTvSeriesGenres } from '../../lib/api';
 import SearchBar from '../SearchBar';
 import { useEffect, useState } from 'react';
@@ -19,10 +19,97 @@ const createSlug = (name) => {
   return name.toLowerCase().replace(/\s+/g, '-');
 };
 
+// Define DropdownMenu component outside of Navbar
+const DropdownMenu = ({ title, categories, genres, genrePathPrefix }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isGenresOpen, setIsGenresOpen] = useState(false);
+  let timeoutId;
+
+  const handleMouseEnter = () => {
+    clearTimeout(timeoutId);
+    setIsOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutId = setTimeout(() => {
+      setIsOpen(false);
+      setIsGenresOpen(false); // Pastikan sub-dropdown juga tertutup
+    }, 100); // Penundaan 100ms
+  };
+
+  // Handler khusus untuk sub-dropdown Genres
+  const handleGenresMouseEnter = () => {
+    setIsGenresOpen(true);
+  };
+
+  const handleGenresMouseLeave = () => {
+    setIsGenresOpen(false);
+  };
+
+  return (
+    <div
+      className="relative"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <button
+        className="flex items-center text-white hover:text-green-600 transition-colors duration-200 font-bold"
+      >
+        {title} <FaChevronDown className={`ml-1 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+      </button>
+      {isOpen && (
+        <div className="absolute left-0 mt-2 w-48 bg-slate-800 dark:bg-gray-800 rounded-md shadow-lg z-20">
+          <div className="py-1">
+            {categories.map((category) => (
+              <Link
+                key={category.href}
+                href={category.href}
+                className={dropdownItemClass}
+                onClick={() => setIsOpen(false)} // Close parent dropdown on item click
+              >
+                {category.label}
+              </Link>
+            ))}
+            {genres.length > 0 && (
+              <div
+                className="relative"
+                onMouseEnter={handleGenresMouseEnter}
+                onMouseLeave={handleGenresMouseLeave}
+              >
+                <button className={subDropdownTriggerClass}>
+                  Genres <FaChevronDown className={`ml-1 transition-transform duration-200 ${isGenresOpen ? 'rotate-180' : ''}`} />
+                </button>
+                {isGenresOpen && (
+                  <div className="absolute top-0 left-full mt-0 w-48 bg-slate-800 dark:bg-gray-800 rounded-md shadow-lg z-30 ml-1">
+                    <div className="py-1 max-h-60 overflow-y-auto">
+                      {genres.map((genre) => (
+                        <Link
+                          key={genre.id}
+                          href={`/${genrePathPrefix}/genre/${createSlug(genre.name)}`}
+                          className={dropdownItemClass}
+                          onClick={() => { setIsOpen(false); setIsGenresOpen(false); }} // Close all on item click
+                        >
+                          {genre.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 export default function Navbar() {
   const [movieGenres, setMovieGenres] = useState([]);
   const [tvGenres, setTvGenres] = useState([]);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showAdultWarning, setShowAdultWarning] = useState(false);
+  const [adultContentType, setAdultContentType] = useState('');
 
   useEffect(() => {
     const fetchGenres = async () => {
@@ -40,88 +127,18 @@ export default function Navbar() {
     fetchGenres();
   }, []);
 
-  const DropdownMenu = ({ title, categories, genres, genrePathPrefix }) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [isGenresOpen, setIsGenresOpen] = useState(false);
-    let timeoutId;
+  const handleAdultContentClick = (type) => {
+    setAdultContentType(type);
+    setShowAdultWarning(true);
+  };
 
-    const handleMouseEnter = () => {
-      clearTimeout(timeoutId);
-      setIsOpen(true);
-    };
-
-    const handleMouseLeave = () => {
-      timeoutId = setTimeout(() => {
-        setIsOpen(false);
-        setIsGenresOpen(false); // Pastikan sub-dropdown juga tertutup
-      }, 100); // Penundaan 100ms
-    };
-
-    // Handler khusus untuk sub-dropdown Genres
-    const handleGenresMouseEnter = () => {
-      setIsGenresOpen(true);
-    };
-
-    const handleGenresMouseLeave = () => {
-      setIsGenresOpen(false);
-    };
-
-    return (
-      <div
-        className="relative"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <button
-          className="flex items-center text-white hover:text-green-600 transition-colors duration-200 font-bold"
-        >
-          {title} <FaChevronDown className={`ml-1 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
-        </button>
-        {isOpen && (
-          <div className="absolute left-0 mt-2 w-48 bg-slate-800 dark:bg-gray-800 rounded-md shadow-lg z-20">
-            <div className="py-1">
-              {categories.map((category) => (
-                <Link
-                  key={category.href}
-                  href={category.href}
-                  className={dropdownItemClass}
-                  onClick={() => setIsOpen(false)} // Close parent dropdown on item click
-                >
-                  {category.label}
-                </Link>
-              ))}
-              {genres.length > 0 && (
-                <div
-                  className="relative"
-                  onMouseEnter={handleGenresMouseEnter}
-                  onMouseLeave={handleGenresMouseLeave}
-                >
-                  <button className={subDropdownTriggerClass}>
-                    Genres <FaChevronDown className={`ml-1 transition-transform duration-200 ${isGenresOpen ? 'rotate-180' : ''}`} />
-                  </button>
-                  {isGenresOpen && (
-                    <div className="absolute top-0 left-full mt-0 w-48 bg-slate-800 dark:bg-gray-800 rounded-md shadow-lg z-30 ml-1">
-                      <div className="py-1 max-h-60 overflow-y-auto">
-                        {genres.map((genre) => (
-                          <Link
-                            key={genre.id}
-                            href={`/${genrePathPrefix}/genre/${createSlug(genre.name)}`}
-                            className={dropdownItemClass}
-                            onClick={() => { setIsOpen(false); setIsGenresOpen(false); }} // Close all on item click
-                          >
-                            {genre.name}
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-          </div>
-        )}
-      </div>
-    );
+  const confirmAdultContent = () => {
+    if (adultContentType === 'erotic') {
+      window.location.href = '/adult/erotic-movies';
+    } else if (adultContentType === 'adult-list') {
+      window.location.href = '/adult/adult-movies';
+    }
+    setShowAdultWarning(false);
   };
 
   return (
@@ -132,7 +149,7 @@ export default function Navbar() {
           <Link href="/" className="flex items-center text-3xl font-bold transition-colors duration-200 group">
             <FaVideo className="text-white mr-2 group-hover:text-yellow-200 transition-colors" />
             <span className="rainbow-text hover:text-white transition-colors">
-              LK21 Stream
+              Layar Kaca
             </span>
           </Link>
           <div className="hidden md:flex items-center space-x-4">
@@ -162,6 +179,22 @@ export default function Navbar() {
               genres={tvGenres}
               genrePathPrefix="tv-show"
             />
+            
+            {/* Tombol Erotic */}
+            <button
+              onClick={() => handleAdultContentClick('erotic')}
+              className="text-white font-bold hover:text-blue-600 transition-colors py-2"
+            >
+              Erotic
+            </button>
+            
+            {/* Tombol Adult */}
+            <button
+              onClick={() => handleAdultContentClick('adult-list')}
+              className="text-white font-bold hover:text-red-600 transition-colors py-2"
+            >
+              Adult
+            </button>
           </div>
         </div>
         
@@ -197,6 +230,28 @@ export default function Navbar() {
             >
               Trending
             </Link>
+            
+            {/* Tombol Erotic untuk mobile */}
+            <button
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                handleAdultContentClick('erotic');
+              }}
+              className="text-white font-bold hover:text-green-600 transition-colors py-2"
+            >
+              Erotic Content
+            </button>
+            
+            {/* Tombol Adult untuk mobile */}
+            <button
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                handleAdultContentClick('adult-list');
+              }}
+              className="text-white font-bold hover:text-green-600 transition-colors py-2"
+            >
+              Adult Movies
+            </button>
             
             <div className="border-t border-gray-700 pt-3">
               <h3 className="text-white font-bold mb-2">Movies</h3>
@@ -296,6 +351,36 @@ export default function Navbar() {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      {/* Modal Peringatan Konten Dewasa */}
+      {showAdultWarning && (
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+          <div className="bg-slate-800 p-6 rounded-lg max-w-md w-full mx-4">
+            <div className="flex items-center mb-4 text-red-500">
+              <FaExclamationTriangle className="text-2xl mr-2" />
+              <h3 className="text-xl font-bold">Adult Content Warning</h3>
+            </div>
+            <p className="text-gray-300 mb-6">
+              This content is intended for viewers aged 18 and over only.
+              Are you sure you want to continue?
+            </p>
+            <div className="flex justify-end space-x-4">
+              <button
+                onClick={() => setShowAdultWarning(false)}
+                className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={confirmAdultContent}
+                className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
+              >
+                Continue
+              </button>
             </div>
           </div>
         </div>

@@ -83,7 +83,7 @@ export async function generateMetadata({ params }) {
   // Jika data tidak ditemukan, kembalikan metadata dasar
   if (!movieData) {
     return {
-      title: 'LK21  Stream',
+      title: 'Layar Kaca',
       description: 'Find your favorite movies to stream.',
     };
   }
@@ -99,13 +99,13 @@ export async function generateMetadata({ params }) {
   const socialImageAlt = `${movieData.title} poster`;
 
   return {
-    title: `LK21  Stream - ${movieData.title}`,
+    title: `Layar Kaca - ${movieData.title}`,
     description: movieData.overview || `Detailed information for movie ${movieData.title}`,
     openGraph: {
       title: movieData.title,
       description: movieData.overview || `Detailed information for movie ${movieData.title}`,
-      url: `https://LK21-Stream.vercel.app/movie/${slug}`,
-      siteName: 'LK21  Stream',
+      url: `https://layarkaca.vercel.app/movie/${slug}`,
+      siteName: 'Layar Kaca',
       images: [
         {
           url: socialImage,

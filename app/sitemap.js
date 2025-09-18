@@ -2,22 +2,29 @@
 import {
   getMovieGenres,
   getMoviesByCategory,
-  getMovieById,
-  getTvSeriesByGenre,
+  getTvSeriesByCategory,
   getTvSeriesGenres,
-  getTvSeriesById,
-  getMoviesByGenre
+  getMoviesByGenre,
+  getTvSeriesByGenre
 } from '../lib/api';
 
-const BASE_URL = 'https://lk21-stream.vercel.app';
+const BASE_URL = 'https://layarkaca.vercel.app';
 
 // Fungsi utilitas untuk membuat slug
 const createSlug = (name, year) => {
   if (!name) return '';
-  const baseSlug = name.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').trim();
-  if (!year || year === 'undefined' || typeof year !== 'string' || year.length < 4) {
+  
+  const baseSlug = name
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .trim();
+
+  // Validasi tahun lebih ketat
+  if (!year || typeof year !== 'string' || year.length !== 4 || isNaN(year)) {
     return baseSlug;
   }
+  
   return `${baseSlug}-${year}`;
 };
 
@@ -31,135 +38,143 @@ export default async function sitemap() {
       getTvSeriesGenres()
     ]);
 
-    // Ambil semua film dari semua kategori
+    console.log('Mengambil data untuk sitemap...');
+
+    // Ambil semua film dari semua kategori (halaman 1 saja)
     const movieCategoryPromises = movieCategories.map(async (category) => {
-      const movies = await getMoviesByCategory(category);
-      return movies?.results || [];
+      const movies = await getMoviesByCategory(category, 1);
+      return movies || [];
     });
     
-    // Ambil semua film dari semua genre
+    // Ambil semua film dari semua genre (halaman 1 saja)
     const movieGenrePromises = (movieGenres || []).map(async (genre) => {
-      const movies = await getMoviesByGenre(genre.id);
-      return movies?.results || [];
+      const movies = await getMoviesByGenre(genre.id, 1);
+      return movies || [];
     });
 
-    // Ambil semua serial TV dari semua kategori
+    // Ambil semua serial TV dari semua kategori (halaman 1 saja)
     const tvCategoryPromises = tvCategories.map(async (category) => {
-      const series = await getTvSeriesByGenre(category);
-      return series?.results || [];
+      const series = await getTvSeriesByCategory(category, 1);
+      return series || [];
     });
 
-    // Ambil semua serial TV dari semua genre
+    // Ambil semua serial TV dari semua genre (halaman 1 saja)
     const tvGenrePromises = (tvGenres || []).map(async (genre) => {
-      const series = await getTvSeriesByGenre(genre.id);
-      return series?.results || [];
+      const series = await getTvSeriesByGenre(genre.id, 1);
+      return series || [];
     });
 
     // Gabungkan semua hasil pengambilan data
-    const allMovieLists = await Promise.all([...movieCategoryPromises, ...movieGenrePromises]);
-    const allTvLists = await Promise.all([...tvCategoryPromises, ...tvGenrePromises]);
+    const [movieCategoryResults, movieGenreResults, tvCategoryResults, tvGenreResults] = await Promise.allSettled([
+      Promise.all(movieCategoryPromises),
+      Promise.all(movieGenrePromises),
+      Promise.all(tvCategoryPromises),
+      Promise.all(tvGenrePromises)
+    ]).then(results => 
+      results.map(result => result.status === 'fulfilled' ? result.value.flat() : [])
+    );
+
+    // Gabungkan semua film dan serial TV
+    const allMovies = [...movieCategoryResults, ...movieGenreResults].flat();
+    const allTvShows = [...tvCategoryResults, ...tvGenreResults].flat();
 
     // Gunakan Map untuk menyimpan ID unik agar tidak ada duplikasi URL
     const uniqueMovies = new Map();
-    allMovieLists.flat().forEach(movie => {
-      if (movie?.id) {
+    allMovies.forEach(movie => {
+      if (movie?.id && movie?.title) {
         uniqueMovies.set(movie.id, movie);
       }
     });
 
     const uniqueTvShows = new Map();
-    allTvLists.flat().forEach(tvShow => {
-      if (tvShow?.id) {
+    allTvShows.forEach(tvShow => {
+      if (tvShow?.id && tvShow?.name) {
         uniqueTvShows.set(tvShow.id, tvShow);
       }
     });
 
-    console.log(`Jumlah film unik yang ditemukan: ${uniqueMovies.size}`);
-    console.log(`Jumlah serial TV unik yang ditemukan: ${uniqueTvShows.size}`);
+    console.log(`Jumlah film unik: ${uniqueMovies.size}`);
+    console.log(`Jumlah serial TV unik: ${uniqueTvShows.size}`);
     
-    // Ambil detail lengkap untuk setiap item unik
-    const movieDetailsPromises = Array.from(uniqueMovies.values()).map(async (movie) => {
-      const details = await getMovieById(movie.id);
-      return details;
-    });
-
-    const tvDetailsPromises = Array.from(uniqueTvShows.values()).map(async (tvShow) => {
-      const details = await getTvSeriesById(tvShow.id);
-      return details;
-    });
-
-    const [movieDetails, tvDetails] = await Promise.allSettled([
-      Promise.all(movieDetailsPromises),
-      Promise.all(tvDetailsPromises)
-    ]).then(results => results.map(result => result.status === 'fulfilled' ? result.value : []));
-
-    console.log(`Jumlah detail film yang berhasil diambil: ${movieDetails.length}`);
-    console.log(`Jumlah detail serial TV yang berhasil diambil: ${tvDetails.length}`);
-
     // Buat URL statis, kategori, dan genre
     const staticUrls = [
-      { url: `${BASE_URL}/`, lastModified: new Date() },
-      { url: `${BASE_URL}/trending`, lastModified: new Date() },
+      { url: `${BASE_URL}/`, lastModified: new Date(), changeFrequency: 'daily', priority: 1.0 },
+      { url: `${BASE_URL}/trending`, lastModified: new Date(), changeFrequency: 'daily', priority: 0.9 },
+      { url: `${BASE_URL}/adult/adult-movies`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.7 },
+      { url: `${BASE_URL}/adult/erotic-movies`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.7 },
     ];
 
     const movieCategoryUrls = movieCategories.map((category) => ({
-      url: `${BASE_URL}/movie/${category}`, lastModified: new Date()
+      url: `${BASE_URL}/movie/${category}`,
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 0.8
     }));
 
     const tvCategoryUrls = tvCategories.map((category) => ({
-      url: `${BASE_URL}/tv-show/${category}`, lastModified: new Date()
+      url: `${BASE_URL}/tv-show/${category}`,
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 0.8
     }));
     
     const movieGenreUrls = (movieGenres || []).map((genre) => ({
-      url: `${BASE_URL}/movie/genre/${createSlug(genre.name)}`, lastModified: new Date()
+      url: `${BASE_URL}/movie/genre-${genre.id}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7
     }));
     
     const tvGenreUrls = (tvGenres || []).map((genre) => ({
-      url: `${BASE_URL}/tv-show/genre/${createSlug(genre.name)}`, lastModified: new Date()
+      url: `${BASE_URL}/tv-show/genre-${genre.id}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7
     }));
 
-    // Buat URL slug film dan serial TV dari detail yang sudah diambil
-    const movieSlugUrls = (movieDetails || []).map((movie) => {
-      if (movie?.title && movie?.release_date) {
-        return {
-          url: `${BASE_URL}/movie/${createSlug(movie.title, movie.release_date.substring(0, 4))}`,
-          lastModified: new Date(),
-        };
-      }
-      return null;
-    }).filter(Boolean);
+    // Buat URL slug film dari data yang sudah ada (tanpa mengambil detail ulang)
+    const movieSlugUrls = Array.from(uniqueMovies.values()).map((movie) => {
+      const year = movie.release_date?.substring(0, 4);
+      return {
+        url: `${BASE_URL}/movie/${createSlug(movie.title, year)}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.6
+      };
+    });
 
-    const movieStreamUrls = (movieDetails || []).map((movie) => {
-      if (movie?.title && movie?.release_date) {
-        return {
-          url: `${BASE_URL}/movie/${createSlug(movie.title, movie.release_date.substring(0, 4))}/stream`,
-          lastModified: new Date(),
-        };
-      }
-      return null;
-    }).filter(Boolean);
+    const movieStreamUrls = Array.from(uniqueMovies.values()).map((movie) => {
+      const year = movie.release_date?.substring(0, 4);
+      return {
+        url: `${BASE_URL}/movie/${createSlug(movie.title, year)}/stream`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.6
+      };
+    });
 
-    const tvSlugUrls = (tvDetails || []).map((tvShow) => {
-      if (tvShow?.name && tvShow?.first_air_date) {
-        return {
-          url: `${BASE_URL}/tv-show/${createSlug(tvShow.name, tvShow.first_air_date.substring(0, 4))}`,
-          lastModified: new Date(),
-        };
-      }
-      return null;
-    }).filter(Boolean);
+    // Buat URL slug serial TV dari data yang sudah ada
+    const tvSlugUrls = Array.from(uniqueTvShows.values()).map((tvShow) => {
+      const year = tvShow.first_air_date?.substring(0, 4);
+      return {
+        url: `${BASE_URL}/tv-show/${createSlug(tvShow.name, year)}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.6
+      };
+    });
 
-    const tvStreamUrls = (tvDetails || []).map((tvShow) => {
-      if (tvShow?.name && tvShow?.first_air_date) {
-        return {
-          url: `${BASE_URL}/tv-show/${createSlug(tvShow.name, tvShow.first_air_date.substring(0, 4))}/stream`,
-          lastModified: new Date(),
-        };
-      }
-      return null;
-    }).filter(Boolean);
+    const tvStreamUrls = Array.from(uniqueTvShows.values()).map((tvShow) => {
+      const year = tvShow.first_air_date?.substring(0, 4);
+      return {
+        url: `${BASE_URL}/tv-show/${createSlug(tvShow.name, year)}/stream`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.6
+      };
+    });
 
-    return [
+    const allUrls = [
       ...staticUrls,
       ...movieCategoryUrls,
       ...tvCategoryUrls,
@@ -171,8 +186,20 @@ export default async function sitemap() {
       ...tvStreamUrls,
     ];
 
+    console.log(`Total URL dalam sitemap: ${allUrls.length}`);
+    console.log('Sitemap berhasil dibuat');
+
+    return allUrls;
+
   } catch (error) {
     console.error("Kesalahan saat membuat sitemap:", error);
-    return []; // Mengembalikan sitemap kosong jika ada kesalahan
+    
+    // Return minimal sitemap dengan URL utama jika error
+    return [
+      { url: `${BASE_URL}/`, lastModified: new Date(), changeFrequency: 'daily', priority: 1.0 },
+      { url: `${BASE_URL}/trending`, lastModified: new Date(), changeFrequency: 'daily', priority: 0.9 },
+      { url: `${BASE_URL}/adult/adult-movies`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.7 },
+      { url: `${BASE_URL}/adult/erotic-movies`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.7 },
+    ];
   }
 }

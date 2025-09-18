@@ -40,17 +40,17 @@ export async function generateMetadata({ params }) {
 
   const title = genre?.name || 'Unknown';
   
-  const pageUrl = `https://LK21-Stream.vercel.app/tv-show/genre/${genreName}`;
-  const imageUrl = 'https://live.staticflickr.com/65535/54783431146_cea3af132d_b.jpg';
+  const pageUrl = `https://layarkaca.vercel.app/tv-show/genre/${genreName}`;
+  const imageUrl = 'https://live.staticflickr.com/65535/54794306467_b29aef23de_b.jpg';
 
   return {
-    title: `123Movies - ${title} TV Series`,
-    description: `Find and watch the best ${title} TV series for free on 123Movies.`,
+    title: `Layar Kaca - ${title} TV Series`,
+    description: `Find and watch the best ${title} TV series for free on Layar Kaca.`,
     openGraph: {
-      title: `123Movies - ${title} TV Series`,
-      description: `Find and watch the best ${title} TV series for free on 123Movies.`,
+      title: `Layar Kaca - ${title} TV Series`,
+      description: `Find and watch the best ${title} TV series for free on Layar Kaca.`,
       url: pageUrl,
-      siteName: '123Movies',
+      siteName: 'Layar Kaca',
       images: [
         {
           url: imageUrl,
@@ -66,8 +66,8 @@ export async function generateMetadata({ params }) {
       card: 'summary_large_image',
       site: '@WatchStream123',
       creator: '@WatchStream123',
-      title: `123Movies - ${title} TV Series`,
-      description: `Find and watch the best ${title} TV series for free on 123Movies.`,
+      title: `Layar Kaca - ${title} TV Series`,
+      description: `Find and watch the best ${title} TV series for free on Layar Kaca.`,
       images: [imageUrl],
     },
     other: {

@@ -4,19 +4,19 @@ import Footer from '../components/layout/Footer';
 import AdsterraLayoutWrapper from '../components/AdsterraLayoutWrapper';
 
 export const metadata = {
-  title: 'LK21 Stream | Watch Movies and TV Series Free HD ',
-  description: 'LK21 Stream is your one-stop destination for free movies, TV shows, and web series. Download thousands of titles in HD quality, with unlimited access to the latest blockbusters and trending series. Start your free entertainment journey today! ',
+  title: 'Layar Kaca | Watch Stream Movies and TV Series Free HD ',
+  description: 'Layar Kaca is your one-stop destination for free movies, TV shows, and web series. Download thousands of titles in HD quality, with unlimited access to the latest blockbusters and trending series. Start your free entertainment journey today! ',
   openGraph: {
-    title: 'LK21 Stream | Watch Movies and TV Series Free HD',
-    description: 'LK21 Stream is your one-stop destination for free movies, TV shows, and web series. Download thousands of titles in HD quality, with unlimited access to the latest blockbusters and trending series. Start your free entertainment journey today! ',
-    url: 'https://LK21 Stream123.vercel.app',
-    siteName: 'LK21 Stream',
+    title: 'Layar Kaca | Watch Stream Movies and TV Series Free HD',
+    description: 'Layar Kaca is your one-stop destination for free movies, TV shows, and web series. Download thousands of titles in HD quality, with unlimited access to the latest blockbusters and trending series. Start your free entertainment journey today! ',
+    url: 'https://layarkaca.vercel.app',
+    siteName: 'Layar Kaca',
     images: [
       {
-        url: 'https://live.staticflickr.com/65535/54783431146_cea3af132d_b.jpg',
+        url: 'https://live.staticflickr.com/65535/54794306467_b29aef23de_b.jpg',
         width: 1200,
         height: 630,
-        alt: 'LK21 Stream - Free HD Movies, TV Shows and Web Series',
+        alt: 'Layar Kaca - Watch Free HD Movies, TV Shows and Web Series',
       },
     ],
     locale: 'en_US',
@@ -26,9 +26,9 @@ export const metadata = {
     card: 'summary_large_image',
     site: '@WatchStream123',
     creator: '@WatchStream123',
-    title: 'LK21 Stream | Watch Movies and TV Series Free HD',
-    description: 'LK21 Stream is your one-stop destination for free movies, TV shows, and web series. Download thousands of titles in HD quality, with unlimited access to the latest blockbusters and trending series. Start your free entertainment journey today!',
-    images: ['https://live.staticflickr.com/65535/54783431146_cea3af132d_b.jpg'],
+    title: 'Layar Kaca | Watch Stream Movies and TV Series Free HD',
+    description: 'Layar Kaca is your one-stop destination for free movies, TV shows, and web series. Download thousands of titles in HD quality, with unlimited access to the latest blockbusters and trending series. Start your free entertainment journey today!',
+    images: ['https://live.staticflickr.com/65535/54794306467_b29aef23de_b.jpg'],
   },
   // Tambahkan tag meta eksplisit untuk Facebook
   other: {
