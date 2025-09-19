@@ -4,19 +4,19 @@ import Footer from '../components/layout/Footer';
 import AdsterraLayoutWrapper from '../components/AdsterraLayoutWrapper';
 
 export const metadata = {
-  title: 'Layar Kaca | Watch Stream Movies and TV Series Free HD ',
-  description: 'Layar Kaca is your one-stop destination for free movies, TV shows, and web series. Download thousands of titles in HD quality, with unlimited access to the latest blockbusters and trending series. Start your free entertainment journey today! ',
+  title: 'Justwatch | Watch Movies and TV Series Free HD ',
+  description: 'Justwatch is your one-stop destination for free movies, TV shows, and web series. Download thousands of titles in HD quality, with unlimited access to the latest blockbusters and trending series. Start your free entertainment journey today! ',
   openGraph: {
-    title: 'Layar Kaca | Watch Stream Movies and TV Series Free HD',
-    description: 'Layar Kaca is your one-stop destination for free movies, TV shows, and web series. Download thousands of titles in HD quality, with unlimited access to the latest blockbusters and trending series. Start your free entertainment journey today! ',
-    url: 'https://layarkaca.vercel.app',
-    siteName: 'Layar Kaca',
+    title: 'Justwatch | Watch Movies and TV Series Free HD',
+    description: 'Justwatch is your one-stop destination for free movies, TV shows, and web series. Download thousands of titles in HD quality, with unlimited access to the latest blockbusters and trending series. Start your free entertainment journey today! ',
+    url: 'https://justwatch.vercel.app',
+    siteName: 'Justwatch',
     images: [
       {
-        url: 'https://live.staticflickr.com/65535/54794306467_b29aef23de_b.jpg',
+        url: 'https://live.staticflickr.com/65535/54797489364_45a23b2498_b.jpg',
         width: 1200,
         height: 630,
-        alt: 'Layar Kaca - Watch Free HD Movies, TV Shows and Web Series',
+        alt: 'Justwatch - Watch Free HD Movies, TV Shows and Web Series',
       },
     ],
     locale: 'en_US',
@@ -26,9 +26,9 @@ export const metadata = {
     card: 'summary_large_image',
     site: '@WatchStream123',
     creator: '@WatchStream123',
-    title: 'Layar Kaca | Watch Stream Movies and TV Series Free HD',
-    description: 'Layar Kaca is your one-stop destination for free movies, TV shows, and web series. Download thousands of titles in HD quality, with unlimited access to the latest blockbusters and trending series. Start your free entertainment journey today!',
-    images: ['https://live.staticflickr.com/65535/54794306467_b29aef23de_b.jpg'],
+    title: 'Justwatch | Watch Movies and TV Series Free HD',
+    description: 'Justwatch is your one-stop destination for free movies, TV shows, and web series. Download thousands of titles in HD quality, with unlimited access to the latest blockbusters and trending series. Start your free entertainment journey today!',
+    images: ['https://live.staticflickr.com/65535/54797489364_45a23b2498_b.jpg'],
   },
   // Tambahkan tag meta eksplisit untuk Facebook
   other: {
@@ -41,7 +41,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
 	  <head>
         {/* Tag verifikasi Google Search Console */}
-        <meta name="google-site-verification" content="43U0FE_9YdrByOFa7zNlMk0hxaMxt1P1zitJs_LBJFU" />
+        <meta name="google-site-verification" content="7WZfh2aCtk9XQObziZk0EbqlvPuYo1qHULjMDlIUw-Y" />
       </head>
       <body>
         <AdsterraLayoutWrapper>

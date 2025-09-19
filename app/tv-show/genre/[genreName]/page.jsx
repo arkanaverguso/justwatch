@@ -40,17 +40,17 @@ export async function generateMetadata({ params }) {
 
   const title = genre?.name || 'Unknown';
   
-  const pageUrl = `https://layarkaca.vercel.app/tv-show/genre/${genreName}`;
-  const imageUrl = 'https://live.staticflickr.com/65535/54794306467_b29aef23de_b.jpg';
+  const pageUrl = `https://justwatch.vercel.app/tv-show/genre/${genreName}`;
+  const imageUrl = 'https://live.staticflickr.com/65535/54797489364_45a23b2498_b.jpg';
 
   return {
-    title: `Layar Kaca - ${title} TV Series`,
-    description: `Find and watch the best ${title} TV series for free on Layar Kaca.`,
+    title: `Justwatch - ${title} TV Series`,
+    description: `Find and watch the best ${title} TV series for free on Justwatch.`,
     openGraph: {
-      title: `Layar Kaca - ${title} TV Series`,
-      description: `Find and watch the best ${title} TV series for free on Layar Kaca.`,
+      title: `Justwatch - ${title} TV Series`,
+      description: `Find and watch the best ${title} TV series for free on Justwatch.`,
       url: pageUrl,
-      siteName: 'Layar Kaca',
+      siteName: 'Justwatch',
       images: [
         {
           url: imageUrl,
@@ -66,8 +66,8 @@ export async function generateMetadata({ params }) {
       card: 'summary_large_image',
       site: '@WatchStream123',
       creator: '@WatchStream123',
-      title: `Layar Kaca - ${title} TV Series`,
-      description: `Find and watch the best ${title} TV series for free on Layar Kaca.`,
+      title: `Justwatch - ${title} TV Series`,
+      description: `Find and watch the best ${title} TV series for free on Justwatch.`,
       images: [imageUrl],
     },
     other: {

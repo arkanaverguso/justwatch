@@ -39,8 +39,8 @@ export async function generateMetadata({ params }) {
   if (CATEGORIES.includes(slug)) {
     const title = slug.replace(/_/g, ' ').toUpperCase();
     return {
-      title: `Fmovies - ${title} Movies`,
-      description: `Explore the ${title} movies collection on Fmovies.`,
+      title: `Justwatch - ${title} Movies`,
+      description: `Explore the ${title} movies collection on Justwatch.`,
     };
   }
 
@@ -51,8 +51,8 @@ export async function generateMetadata({ params }) {
     const genres = await getMovieGenres();
     const genreName = genres.find(g => g.id == genreId)?.name || 'Unknown';
     return {
-      title: `Fmovies - ${genreName} Movies`,
-      description: `Discover ${genreName} movies on Fmovies.`,
+      title: `Justwatch - ${genreName} Movies`,
+      description: `Discover ${genreName} movies on Justwatch.`,
     };
   }
 
@@ -83,7 +83,7 @@ export async function generateMetadata({ params }) {
   // Jika data tidak ditemukan, kembalikan metadata dasar
   if (!movieData) {
     return {
-      title: 'Layar Kaca',
+      title: 'Justwatch',
       description: 'Find your favorite movies to stream.',
     };
   }
@@ -99,13 +99,13 @@ export async function generateMetadata({ params }) {
   const socialImageAlt = `${movieData.title} poster`;
 
   return {
-    title: `Layar Kaca - ${movieData.title}`,
+    title: `Justwatch - ${movieData.title}`,
     description: movieData.overview || `Detailed information for movie ${movieData.title}`,
     openGraph: {
       title: movieData.title,
       description: movieData.overview || `Detailed information for movie ${movieData.title}`,
-      url: `https://layarkaca.vercel.app/movie/${slug}`,
-      siteName: 'Layar Kaca',
+      url: `https://justwatch.vercel.app/movie/${slug}`,
+      siteName: 'Justwatch',
       images: [
         {
           url: socialImage,
