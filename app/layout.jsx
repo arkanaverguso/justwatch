@@ -16,7 +16,7 @@ export const metadata = {
         url: 'https://live.staticflickr.com/65535/54797489364_45a23b2498_b.jpg',
         width: 1200,
         height: 630,
-        alt: 'Justwatch - Watch Free HD Movies, TV Shows and Web Series',
+        alt: 'Justwatch - Stream Free HD Movies, TV Shows and Web Series',
       },
     ],
     locale: 'en_US',
