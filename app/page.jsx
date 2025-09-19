@@ -13,7 +13,7 @@ export default function About() {
         <meta property="og:title" content="Justwatch - Free HD Streaming Platform" />
         <meta property="og:description" content="Stream movies, TV shows and web series free in HD quality on Justwatch. No registration required." />
         <meta property="og:image" content="https://live.staticflickr.com/65535/54797489364_45a23b2498_b.jpg" />
-        <meta property="og:url" content="https://justwatch.vercel.app/" />
+        <meta property="og:url" content="https://justwatch-id.vercel.app/" />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
 
