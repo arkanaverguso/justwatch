@@ -75,7 +75,7 @@ export default function TrendingClient({ initialMovies, initialTvSeries }) {
               <button 
                 onClick={loadMoreMovies}
                 disabled={loadingMovies}
-                className="bg-blue-700 hover:bg-red-700 text-white font-bold py-2 px-6 rounded transition-colors duration-200 disabled:opacity-50"
+                className="bg-blue-700 hover:bg-green-700 text-white font-bold py-2 px-6 rounded transition-colors duration-200 disabled:opacity-50"
               >
                 {loadingMovies ? 'Loading...' : 'Load More'}
               </button>
