@@ -8,7 +8,7 @@ import {
   getTvSeriesByGenre
 } from '../lib/api';
 
-const BASE_URL = 'https://justwatch.vercel.app';
+const BASE_URL = 'https://justwatch-id.vercel.app';
 
 // Fungsi utilitas untuk membuat slug
 const createSlug = (name, year) => {
