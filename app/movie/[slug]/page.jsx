@@ -39,8 +39,8 @@ export async function generateMetadata({ params }) {
   if (CATEGORIES.includes(slug)) {
     const title = slug.replace(/_/g, ' ').toUpperCase();
     return {
-      title: `Juswatch - ${title} Movies`,
-      description: `Explore the ${title} movies collection on Juswatch.`,
+      title: `Justwatch - ${title} Movies`,
+      description: `Explore the ${title} movies collection on Justwatch.`,
     };
   }
 
@@ -51,8 +51,8 @@ export async function generateMetadata({ params }) {
     const genres = await getMovieGenres();
     const genreName = genres.find(g => g.id == genreId)?.name || 'Unknown';
     return {
-      title: `Juswatch - ${genreName} Movies`,
-      description: `Discover ${genreName} movies on Juswatch.`,
+      title: `Justwatch - ${genreName} Movies`,
+      description: `Discover ${genreName} movies on Justwatch.`,
     };
   }
 
@@ -83,7 +83,7 @@ export async function generateMetadata({ params }) {
   // Jika data tidak ditemukan, kembalikan metadata dasar
   if (!movieData) {
     return {
-      title: 'Juswatch',
+      title: 'Justwatch',
       description: 'Watch Movie Stream Movies and Tv Series Free.',
     };
   }
@@ -99,13 +99,13 @@ export async function generateMetadata({ params }) {
   const socialImageAlt = `${movieData.title} poster`;
 
   return {
-    title: `Juswatch - ${movieData.title}`,
+    title: `Justwatch - ${movieData.title}`,
     description: movieData.overview || `Detailed information for movie ${movieData.title}`,
     openGraph: {
       title: movieData.title,
       description: movieData.overview || `Detailed information for movie ${movieData.title}`,
-      url: `https://juswatch-id.vercel.app/movie/${slug}`,
-      siteName: 'Juswatch',
+      url: `https://Justwatch-id.vercel.app/movie/${slug}`,
+      siteName: 'Justwatch',
       images: [
         {
           url: socialImage,

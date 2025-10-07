@@ -4,20 +4,20 @@ import Footer from '../components/layout/Footer';
 import AdsterraLayoutWrapper from '../components/AdsterraLayoutWrapper';
 
 export const metadata = {
-  title: 'Juswatch | Watch Movies, Stream TV Series Free - Complete Movie Database',
-  description: 'Juswatch is your ultimate movie database with 10,000+ movies, 5,000+ TV series, actor profiles, genre pages, and yearly archives. Discover, stream, and enjoy cinematic excellence with our comprehensive entertainment platform.',
+  title: 'Justwatch | Watch Movies, Stream TV Series Free - Complete Movie Database',
+  description: 'Justwatch is your ultimate movie database with 10,000+ movies, 5,000+ TV series, actor profiles, genre pages, and yearly archives. Discover, stream, and enjoy cinematic excellence with our comprehensive entertainment platform.',
   keywords: 'movies, tv series, streaming, movie database, actors, genres, rankings, movie archives',
   openGraph: {
-    title: 'Juswatch | Complete Movie & TV Series Database',
+    title: 'Justwatch | Complete Movie & TV Series Database',
     description: 'Your ultimate destination for movies, TV series, actor profiles, and streaming information. Explore genres, yearly archives, and top rankings.',
-    url: 'https://Juswatch-Movie.vercel.app/',
-    siteName: 'Juswatch',
+    url: 'https://Justwatch-id.vercel.app/',
+    siteName: 'Justwatch',
     images: [
       {
         url: 'https://live.staticflickr.com/65535/54797489364_45a23b2498_b.jpg',
         width: 1200,
         height: 630,
-        alt: 'Juswatch - Complete Movie Database',
+        alt: 'Justwatch - Complete Movie Database',
       },
     ],
     locale: 'en_US',
@@ -27,8 +27,8 @@ export const metadata = {
     card: 'summary_large_image',
     site: '@WatchStream123',
     creator: '@WatchStream123',
-    title: 'Juswatch | Complete Movie & TV Series Database',
-    description: 'Explore 10,000+ movies, 5,000+ TV series, actor profiles, and streaming guides on Juswatch.',
+    title: 'Justwatch | Complete Movie & TV Series Database',
+    description: 'Explore 10,000+ movies, 5,000+ TV series, actor profiles, and streaming guides on Justwatch.',
     images: ['https://live.staticflickr.com/65535/54797489364_45a23b2498_b.jpg'],
   },
   // Tambahkan tag meta eksplisit untuk Facebook
@@ -50,12 +50,12 @@ export default function RootLayout({ children }) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "MovieDatabase",
-              "name": "Juswatch",
+              "name": "Justwatch",
               "description": "Complete movie and TV series database with streaming information",
-              "url": "https://Juswatch-Movie.vercel.app/",
+              "url": "https://Justwatch-id.vercel.app/",
               "logo": "https://live.staticflickr.com/65535/54797489364_45a23b2498_b.jpg",
               "sameAs": [
-                "https://Juswatch-Movie.vercel.app/"
+                "https://Justwatch-id.vercel.app/"
               ]
             })
           }}

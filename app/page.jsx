@@ -11,7 +11,7 @@ export default function About() {
       <div className="bg-gradient-to-b from-purple-900/50 to-slate-900 py-16">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-3xl md:text-5xl font-extrabold mb-5 text-orange-400">
-            Juswatch - Ultimate Movie & TV Series Database
+            Justwatch - Ultimate Movie & TV Series Database
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto">
             Your comprehensive guide to 10,000+ movies, 5,000+ TV series, actor profiles, genre pages, and streaming information.
@@ -47,10 +47,10 @@ export default function About() {
                 className="rounded-xl shadow-2xl mx-auto mb-8"
               />
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-orange-300">
-                Discover the World of Cinema with Juswatch
+                Discover the World of Cinema with Justwatch
               </h2>
               <p className="text-lg text-gray-400 max-w-3xl mx-auto">
-                Juswatch is United America's most complete movie and TV series information platform. 
+                Justwatch is United America's most complete movie and TV series information platform. 
                 We provide accurate data, user reviews, streaming guides, actor profiles, and comprehensive genre archives.
               </p>
             </div>
@@ -247,7 +247,7 @@ export default function About() {
               Ready to Explore the World of Cinema?
             </h2>
             <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
-              Join thousands of movie enthusiasts discovering new content daily on Juswatch.
+              Join thousands of movie enthusiasts discovering new content daily on Justwatch.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link href="/movie/365-days-this-day-2022/stream" className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors flex items-center gap-2">
