@@ -4,19 +4,20 @@ import Footer from '../components/layout/Footer';
 import AdsterraLayoutWrapper from '../components/AdsterraLayoutWrapper';
 
 export const metadata = {
-  title: 'Justwatch | Watch Movies and TV Series Free HD ',
-  description: 'Justwatch is your one-stop destination for free movies, TV shows, and web series. Download thousands of titles in HD quality, with unlimited access to the latest blockbusters and trending series. Start your free entertainment journey today! ',
+  title: 'Juswatch | Watch Movies, Stream TV Series Free - Complete Movie Database',
+  description: 'Juswatch is your ultimate movie database with 10,000+ movies, 5,000+ TV series, actor profiles, genre pages, and yearly archives. Discover, stream, and enjoy cinematic excellence with our comprehensive entertainment platform.',
+  keywords: 'movies, tv series, streaming, movie database, actors, genres, rankings, movie archives',
   openGraph: {
-    title: 'Justwatch | Watch Movies and TV Series Free HD',
-    description: 'Justwatch is your one-stop destination for free movies, TV shows, and web series. Download thousands of titles in HD quality, with unlimited access to the latest blockbusters and trending series. Start your free entertainment journey today! ',
-    url: 'https://justwatch.vercel.app',
-    siteName: 'Justwatch',
+    title: 'Juswatch | Complete Movie & TV Series Database',
+    description: 'Your ultimate destination for movies, TV series, actor profiles, and streaming information. Explore genres, yearly archives, and top rankings.',
+    url: 'https://Juswatch-Movie.vercel.app/',
+    siteName: 'Juswatch',
     images: [
       {
         url: 'https://live.staticflickr.com/65535/54797489364_45a23b2498_b.jpg',
         width: 1200,
         height: 630,
-        alt: 'Justwatch - Stream Free HD Movies, TV Shows and Web Series',
+        alt: 'Juswatch - Complete Movie Database',
       },
     ],
     locale: 'en_US',
@@ -26,8 +27,8 @@ export const metadata = {
     card: 'summary_large_image',
     site: '@WatchStream123',
     creator: '@WatchStream123',
-    title: 'Justwatch | Watch Movies and TV Series Free HD',
-    description: 'Justwatch is your one-stop destination for free movies, TV shows, and web series. Download thousands of titles in HD quality, with unlimited access to the latest blockbusters and trending series. Start your free entertainment journey today!',
+    title: 'Juswatch | Complete Movie & TV Series Database',
+    description: 'Explore 10,000+ movies, 5,000+ TV series, actor profiles, and streaming guides on Juswatch.',
     images: ['https://live.staticflickr.com/65535/54797489364_45a23b2498_b.jpg'],
   },
   // Tambahkan tag meta eksplisit untuk Facebook
@@ -42,6 +43,23 @@ export default function RootLayout({ children }) {
 	  <head>
         {/* Tag verifikasi Google Search Console */}
         <meta name="google-site-verification" content="7WZfh2aCtk9XQObziZk0EbqlvPuYo1qHULjMDlIUw-Y" />
+        {/* Schema.org markup untuk Movie Database */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "MovieDatabase",
+              "name": "Juswatch",
+              "description": "Complete movie and TV series database with streaming information",
+              "url": "https://Juswatch-Movie.vercel.app/",
+              "logo": "https://live.staticflickr.com/65535/54797489364_45a23b2498_b.jpg",
+              "sameAs": [
+                "https://Juswatch-Movie.vercel.app/"
+              ]
+            })
+          }}
+        />
       </head>
       <body>
         <AdsterraLayoutWrapper>

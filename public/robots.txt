@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*?*
+Crawl-delay: 1
 
-Sitemap: https://justwatch-id.vercel.app/
+# Sitemaps
+Sitemap: https://juswatch-id.vercel.app/sitemap.xml

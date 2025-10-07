@@ -39,8 +39,8 @@ export async function generateMetadata({ params }) {
   if (CATEGORIES.includes(slug)) {
     const title = slug.replace(/_/g, ' ').toUpperCase();
     return {
-      title: `Justwatch - ${title} Movies`,
-      description: `Explore the ${title} movies collection on Justwatch.`,
+      title: `Juswatch - ${title} Movies`,
+      description: `Explore the ${title} movies collection on Juswatch.`,
     };
   }
 
@@ -51,8 +51,8 @@ export async function generateMetadata({ params }) {
     const genres = await getMovieGenres();
     const genreName = genres.find(g => g.id == genreId)?.name || 'Unknown';
     return {
-      title: `Justwatch - ${genreName} Movies`,
-      description: `Discover ${genreName} movies on Justwatch.`,
+      title: `Juswatch - ${genreName} Movies`,
+      description: `Discover ${genreName} movies on Juswatch.`,
     };
   }
 
@@ -83,8 +83,8 @@ export async function generateMetadata({ params }) {
   // Jika data tidak ditemukan, kembalikan metadata dasar
   if (!movieData) {
     return {
-      title: 'Justwatch',
-      description: 'Find your favorite movies to stream.',
+      title: 'Juswatch',
+      description: 'Watch Movie Stream Movies and Tv Series Free.',
     };
   }
 
@@ -99,13 +99,13 @@ export async function generateMetadata({ params }) {
   const socialImageAlt = `${movieData.title} poster`;
 
   return {
-    title: `Justwatch - ${movieData.title}`,
+    title: `Juswatch - ${movieData.title}`,
     description: movieData.overview || `Detailed information for movie ${movieData.title}`,
     openGraph: {
       title: movieData.title,
       description: movieData.overview || `Detailed information for movie ${movieData.title}`,
-      url: `https://justwatch.vercel.app/movie/${slug}`,
-      siteName: 'Justwatch',
+      url: `https://juswatch-id.vercel.app/movie/${slug}`,
+      siteName: 'Juswatch',
       images: [
         {
           url: socialImage,
@@ -419,7 +419,7 @@ export default async function MoviePage({ params }) {
 		{/* Bottom Stream Button */}
         <div className="mt-12 text-center">
              <a href={`/movie/${slug}/stream`}>
-              <button className="bg-blue-700 hover:bg-red-700 text-white font-bold py-4 px-10 rounded-lg text-xl transition-transform transform hover:scale-105 shadow-lg">
+              <button className="bg-blue-700 hover:bg-green-800 text-white font-bold py-4 px-10 rounded-lg text-xl transition-transform transform hover:scale-105 shadow-lg">
                 🎬 Stream Now
               </button>
             </a>
